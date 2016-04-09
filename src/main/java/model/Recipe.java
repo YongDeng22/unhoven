@@ -4,11 +4,21 @@ import java.util.ArrayList;
 
 public class Recipe {
 	private int number_of_servings;
-	private long recipe_id;
+	private long id;
 	private ArrayList<Ingredient> ingredients;
-	private User author;
-
-
+	private ArrayList<User> authors;
+	private String title;
+	private String description;
+	private String category;
+	private String subCategory;
+	private String primaryIngredient;
+	private String webURL;
+	private String imageURL;
+	private String instructions;
+	private int yieldNumber;
+	private String yieldUnit;
+	
+	
 	public int getNumber_of_servings() {
 		return number_of_servings;
 	}
@@ -19,13 +29,13 @@ public class Recipe {
 	}
 
 
-	public long getRecipe_id() {
-		return recipe_id;
+	public long getId() {
+		return id;
 	}
 
 
-	public void setRecipe_id(long recipe_id) {
-		this.recipe_id = recipe_id;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 
@@ -39,13 +49,113 @@ public class Recipe {
 	}
 
 
-	public User getAuthor() {
-		return author;
+	public String getTitle() {
+		return title;
 	}
 
 
-	public void setAuthor(User author) {
-		this.author = author;
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+	public String getCategory() {
+		return category;
+	}
+
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+
+	public String getSubCategory() {
+		return subCategory;
+	}
+
+
+	public void setSubCategory(String subCategory) {
+		this.subCategory = subCategory;
+	}
+
+
+	public String getPrimaryIngredient() {
+		return primaryIngredient;
+	}
+
+
+	public void setPrimaryIngredient(String primaryIngredient) {
+		this.primaryIngredient = primaryIngredient;
+	}
+
+
+	public String getWebURL() {
+		return webURL;
+	}
+
+
+	public void setWebURL(String webURL) {
+		this.webURL = webURL;
+	}
+
+
+	public String getImageURL() {
+		return imageURL;
+	}
+
+
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
+	}
+
+
+	public String getInstructions() {
+		return instructions;
+	}
+
+
+	public void setInstructions(String instructions) {
+		this.instructions = instructions;
+	}
+
+
+	public int getYieldNumber() {
+		return yieldNumber;
+	}
+
+
+	public void setYieldNumber(int yieldNumber) {
+		this.yieldNumber = yieldNumber;
+	}
+
+
+	public String getYieldUnit() {
+		return yieldUnit;
+	}
+
+
+	public void setYieldUnit(String yieldUnit) {
+		this.yieldUnit = yieldUnit;
+	}
+
+
+	public ArrayList<User> getAuthors() {
+		return authors;
+	}
+
+
+	public void setAuthors(ArrayList<User> authors) {
+		this.authors = authors;
 	}
 
 }
