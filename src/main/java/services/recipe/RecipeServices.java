@@ -44,7 +44,12 @@ public class RecipeServices {
 //			return Response.status(Response.Status.OK).entity("test").build();
 
 		} catch (Exception e) {
-			return Response.status(500).entity(e.getMessage()).build();
+			StackTraceElement[] s = e.getStackTrace();
+			StringBuilder sb = new StringBuilder();
+			for (StackTraceElement se: s) {
+				sb.append(se.getMethodName() + "\n");
+			}
+			return Response.status(500).entity(sb.toString()).build();
 		}
 	}
 
