@@ -5,7 +5,7 @@ import javax.ws.rs.PathParam;
 
 
 @Path("user")
-public class User {
+public class Poster {
 	private long user_id;
 	private String userName;
 	
@@ -26,8 +26,8 @@ public class User {
 	}
 
 	@Path("{id}")
-	public User getUser(@PathParam("id") long id){
-		User user = new User();
+	public Poster getUser(@PathParam("id") long id){
+		Poster user = new Poster();
 		user.setUser_id(id);
 		return user;
 	}

@@ -1,7 +1,7 @@
 package model;
 
 public class Ingredient {
-
+	private long ingredient_id;
 	private String name;
 	private int amount;
 	private String unit;
@@ -23,6 +23,12 @@ public class Ingredient {
 	}
 	public void setUnit(String unit) {
 		this.unit = unit;
+	}
+	public long getIngredient_id() {
+		return ingredient_id;
+	}
+	public void setIngredient_id(long ingredient_id) {
+		this.ingredient_id = ingredient_id;
 	}
 	
 }

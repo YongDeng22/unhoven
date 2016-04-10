@@ -3,10 +3,8 @@ package model;
 import java.util.ArrayList;
 
 public class Recipe {
-	private int number_of_servings;
+//	private int number_of_servings;
 	private long id;
-	private ArrayList<Ingredient> ingredients;
-	private ArrayList<User> authors;
 	private String title;
 	private String description;
 	private String category;
@@ -18,15 +16,17 @@ public class Recipe {
 	private int yieldNumber;
 	private String yieldUnit;
 	
+	private ArrayList<Ingredient> ingredients;
+	private Poster poster;
 	
-	public int getNumber_of_servings() {
-		return number_of_servings;
-	}
-
-
-	public void setNumber_of_servings(int number_of_servings) {
-		this.number_of_servings = number_of_servings;
-	}
+//	public int getNumber_of_servings() {
+//		return number_of_servings;
+//	}
+//
+//
+//	public void setNumber_of_servings(int number_of_servings) {
+//		this.number_of_servings = number_of_servings;
+//	}
 
 
 	public long getId() {
@@ -149,13 +149,13 @@ public class Recipe {
 	}
 
 
-	public ArrayList<User> getAuthors() {
-		return authors;
+	public Poster getPoster() {
+		return poster;
 	}
 
 
-	public void setAuthors(ArrayList<User> authors) {
-		this.authors = authors;
+	public void setPoster(Poster poster) {
+		this.poster = poster;
 	}
 
 }

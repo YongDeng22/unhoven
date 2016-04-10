@@ -5,70 +5,60 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 import connectionprovider.ConnectionProvider;
 import model.Ingredient;
-import model.Recipe;
-import model.User;
+import model.Poster;
+import model.Recipe;;
 
 public class RecipeCommands {
-	private static final String dbURL = "dburl";
-	private static final String createRecipeSql = "";
-	private static final String getSingleRecipeSql = "SELECT * FROM RECIPE WHERE ID = ?";
-	private static final String updateRecipeSql = "";
-	private static final String deleteRecipeSql = "";
-	private static final String getRecipeByUserSql = "";
-	private static final String searchRecipeSql = "";
-	
-	private static final String createIngredientSql = "";
-	private static final String getSingleIngredientSql = "selec";
-	private static final String updateIngredientSql = "";
-	private static final String deleteIngredientSql = "";
-	private static final String getIngredientByUserSql = "";
-	private static final String searchIngredientSql = "";
-	
-	private static final String createUserSql = "";
-	private static final String getSingleUserSql = "selec";
-	private static final String updateUserSql = "";
-	private static final String deleteUserSql = "";
-	private static final String getUserByUserSql = "";
-	private static final String searchUserSql = "";
-	
-	
+
 	public static boolean createRecipe(Recipe recipe) {
 		// TODO Auto-generated method stub
 		return true;
 	}
 
-	public static Recipe getRecipe(long id) {
+	public static Recipe getRecipe(long recipe_id) {
 		Recipe recipe = null;
-		try {
-			Connection connection = ConnectionProvider.getConnection();
-			PreparedStatement statement = connection.prepareStatement(getSingleRecipeSql);
-			statement.setLong(0, id);
-			statement.setMaxRows(1);
+		ArrayList<Ingredient> ingredients = new ArrayList();
+
+		try (Connection connection = ConnectionProvider.getConnection()) {
+			PreparedStatement statement = connection.prepareStatement(CommandConstants.GET_SINGLE_RECIPE_BY_ID_SQL);
+			statement.setLong(0, recipe_id);
+
 			ResultSet rs = statement.executeQuery();
-			if (rs.next()) {
+
+			while (rs.next()) {
 				recipe = new Recipe();
-				recipe.setId(rs.getLong("id"));
-				recipe.setCategory(rs.getString("category"));
-				recipe.setDescription(rs.getString("description"));
-				recipe.setNumber_of_servings(rs.getInt("number_of_servings"));
-				recipe.setTitle(rs.getString("title"));
-				recipe.setSubCategory(rs.getString("subCategory"));
-				recipe.setPrimaryIngredient(rs.getString("primaryIngredient"));
-				recipe.setWebURL(rs.getString("webURL"));
-				recipe.setImageURL(rs.getString("imageURL"));
-				recipe.setInstructions(rs.getString("instructions"));
-				recipe.setYieldNumber(rs.getInt("yieldNumber"));
-				recipe.setYieldUnit(rs.getString("yieldUnit"));
-				recipe.setIngredients(getIngredients(id));
-				recipe.setAuthors(getAuthors(id));
+				if (recipe.getId() != recipe_id) {
+					recipe.setId(recipe_id);
+					recipe.setTitle(rs.getString("title"));
+					recipe.setDescription(rs.getString("description"));
+					recipe.setCategory(rs.getString("category"));
+					recipe.setSubCategory(rs.getString("subCategory"));
+					recipe.setPrimaryIngredient(rs.getString("primary_ingredient"));
+					recipe.setWebURL(rs.getString("web_url"));
+					recipe.setImageURL(rs.getString("image_url"));
+					recipe.setInstructions(rs.getString("instructions"));
+					recipe.setYieldNumber(rs.getInt("yield_number"));
+					recipe.setYieldUnit(rs.getString("yield_unit"));
+					
+					Poster poster = new Poster();
+					poster.setUser_id(rs.getLong("user_id"));
+					poster.setUserName(rs.getString("user_name"));
+					recipe.setPoster(poster);
+				}
+
+				Ingredient ingredient = new Ingredient();
+				ingredient.setIngredient_id(rs.getLong("ingredient_id"));
+				ingredient.setName(rs.getString("name"));
+				ingredient.setAmount(rs.getInt("amount"));
+				ingredient.setUnit(rs.getString("unit"));
+				ingredients.add(ingredient);
 			}
-			
+			recipe.setIngredients(ingredients);
+
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -96,18 +86,15 @@ public class RecipeCommands {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
-	//#########################################
-	public static ArrayList<User> getAuthors(long id) {
 
-		
+	// #########################################
+	public static ArrayList<Poster> getAuthors(long id) {
+
 		return null;
 	}
-	
+
 	public static ArrayList<Ingredient> getIngredients(long id) {
 
-		
 		return null;
 	}
 

@@ -11,12 +11,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import model.*;
 import command.*;
 
-//Creating a recipe HTTP POST
-//​URL: https://unhoven.herokuapp.com/rest/recipe
+
 @Path("/recipe")
 public class RecipeServices {
 	ObjectMapper mapper = new ObjectMapper();
 
+	//Creating a recipe HTTP POST
+	//​URL: https://unhoven.herokuapp.com/rest/recipe
 	@POST
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN })
 	public Response createRecipe(String recipeString) {
@@ -29,14 +30,6 @@ public class RecipeServices {
 			return Response.status(500).entity(e.toString()).build();
 		}
 	}
-
-	@GET
-	@Path("a/test")
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN })
-	public String test() {
-		return "tttttttttt";
-	}
-	
 	
 	// Reading a recipe HTTP GET
 	// ​​URL: https://unhoven.herokuapp.com/rest/recipe/{id}
@@ -45,10 +38,10 @@ public class RecipeServices {
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN })
 	public Response getRecipe(@PathParam("recipeId") long recipeId) {
 		try {
-//			Recipe recipe = RecipeCommands.getRecipe(recipeId);
-//			String recipeJson = mapper.writeValueAsString(recipe);
-//			return Response.status(Response.Status.OK).entity(recipeJson).build();
-			return Response.status(Response.Status.OK).entity("test").build();
+			Recipe recipe = RecipeCommands.getRecipe(recipeId);
+			String recipeJson = mapper.writeValueAsString(recipe);
+			return Response.status(Response.Status.OK).entity(recipeJson).build();
+//			return Response.status(Response.Status.OK).entity("test").build();
 
 		} catch (Exception e) {
 			return Response.status(500).entity(e.toString()).build();
@@ -60,7 +53,7 @@ public class RecipeServices {
 	@PUT
 	@Path("{recipeId}")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN })
-	public Response updateRecipe(@PathParam("recipeId") long recipeId, @QueryParam("recipeString") String recipeString) {
+	public Response updateRecipe(@PathParam("recipeId") long recipeId, String recipeString) {
 		try {
 			Recipe recipe = mapper.readValue(recipeString, Recipe.class);
 			boolean result = RecipeCommands.updateRecipe(recipeId, recipe);
