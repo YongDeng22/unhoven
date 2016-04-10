@@ -13,17 +13,18 @@ import model.Poster;
 import model.Recipe;;
 
 public class RecipeCommands {
+	static Connection connection = null;
 
 	public static boolean createRecipe(Recipe recipe) {
 		// TODO Auto-generated method stub
 		return true;
 	}
 
-	public static Recipe getRecipe(long recipe_id) {
+	public static Recipe getRecipe(long recipe_id) throws SQLException {
 		Recipe recipe = null;
 		ArrayList<Ingredient> ingredients = new ArrayList();
-
-		try (Connection connection = ConnectionProvider.getConnection()) {
+		try {
+			connection = ConnectionProvider.getConnection();
 			PreparedStatement statement = connection.prepareStatement(CommandConstants.GET_SINGLE_RECIPE_BY_ID_SQL);
 			statement.setLong(0, recipe_id);
 
@@ -63,6 +64,8 @@ public class RecipeCommands {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			connection.close();
 		}
 		return recipe;
 	}
