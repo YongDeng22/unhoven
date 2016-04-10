@@ -26,7 +26,7 @@ public class RecipeCommands {
 		try {
 			connection = ConnectionProvider.getConnection();
 			PreparedStatement statement = connection.prepareStatement(CommandConstants.GET_SINGLE_RECIPE_BY_ID_SQL);
-			statement.setLong(0, recipe_id);
+			statement.setLong(1, recipe_id);
 
 			ResultSet rs = statement.executeQuery();
 
