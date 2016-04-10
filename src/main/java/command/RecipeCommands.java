@@ -61,12 +61,12 @@ public class RecipeCommands {
 			recipe.setIngredients(ingredients);
 
 		} catch (URISyntaxException e) {
-			recipe.setDescription(e.toString());
+			e.printStackTrace();
 		} catch (SQLException e) {
 			recipe.setDescription(e.toString());
 			e.printStackTrace();
 		} catch(Exception e){
-			recipe.setDescription(e.toString());
+			e.printStackTrace();
 		} finally {
 			connection.close();
 		}
