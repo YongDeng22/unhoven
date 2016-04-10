@@ -44,7 +44,7 @@ public class RecipeServices {
 //			return Response.status(Response.Status.OK).entity("test").build();
 
 		} catch (Exception e) {
-			return Response.status(500).entity(e.toString()).build();
+			return Response.status(500).entity(e.getStackTrace().toString()).build();
 		}
 	}
 
