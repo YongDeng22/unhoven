@@ -19,7 +19,7 @@ public class CommandConstants {
 	
 	public static final String GET_SINGLE_RECIPE_BY_ID_SQL = 
 			"SELECT * "
-			+ "FROM recipe"
+			+ "FROM recipe "
 //			+ "LEFT OUTER JOIN ingredient ON associations.ingredient_id = ingredient.ingredient_id "
 //			+ "LEFT OUTER JOIN poster ON associations.user_id = poster.user_id "
 			+ "WHERE recipe.recipe_id = ?";

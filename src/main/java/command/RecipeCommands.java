@@ -29,7 +29,7 @@ public class RecipeCommands {
 			statement.setLong(1, recipe_id);
 
 			ResultSet rs = statement.executeQuery();
-
+			System.out.println(rs.getMetaData().toString());
 			while (rs.next()) {
 				recipe = new Recipe();
 //				if (recipe.getId() != recipe_id) {
