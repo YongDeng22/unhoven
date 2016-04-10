@@ -63,7 +63,6 @@ public class RecipeCommands {
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
-			recipe.setDescription(e.toString());
 			e.printStackTrace();
 		} catch(Exception e){
 			e.printStackTrace();
