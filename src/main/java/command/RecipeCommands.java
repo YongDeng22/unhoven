@@ -32,7 +32,7 @@ public class RecipeCommands {
 
 			while (rs.next()) {
 				recipe = new Recipe();
-				if (recipe.getId() != recipe_id) {
+//				if (recipe.getId() != recipe_id) {
 					recipe.setId(recipe_id);
 					recipe.setTitle(rs.getString("title"));
 					recipe.setDescription(rs.getString("description"));
@@ -49,7 +49,7 @@ public class RecipeCommands {
 					poster.setUser_id(rs.getLong("user_id"));
 					poster.setUserName(rs.getString("user_name"));
 					recipe.setPoster(poster);
-				}
+//				}
 
 				Ingredient ingredient = new Ingredient();
 				ingredient.setIngredient_id(rs.getLong("ingredient_id"));
