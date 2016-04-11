@@ -93,9 +93,9 @@ public class RecipeServices {
 	@GET
 	@Path("search")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN })
-	public Response searchRecipe(@QueryParam("searchParam") String searchParam) {
+	public Response searchRecipe(@QueryParam("query") String query) {
 		try {
-			ArrayList<Recipe> recipes = RecipeCommands.searchRecipe(searchParam);
+			ArrayList<Recipe> recipes = RecipeCommands.searchRecipe(query);
 			String recipeJson = mapper.writeValueAsString(recipes);
 			return Response.status(Response.Status.OK).entity(recipeJson).build();
 		} catch (JsonProcessingException e) {
@@ -106,7 +106,7 @@ public class RecipeServices {
 	// Get recipes created by the user HTTP GET
 	// ​​​URL: https://unhoven.herokuapp.com/rest/user/{id}/recipies/
 	@GET
-	@Path("user/{userId}")
+	@Path("user/{userId}/recipies")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN })
 	public Response searchRecipe(@PathParam("userId") long userId) {
 		try {
