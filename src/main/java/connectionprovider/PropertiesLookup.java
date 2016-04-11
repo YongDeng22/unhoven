@@ -5,7 +5,7 @@ import java.util.Properties;
 
 public class PropertiesLookup {
 	Properties prop = new Properties();
-	String filename = "/unhoven/src/main/java/properties.properties";
+	String filename = "config.properties";
 	InputStream input = null;
 	private static PropertiesLookup instance = new PropertiesLookup();
 	

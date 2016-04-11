@@ -1,7 +1,7 @@
 package model;
 
 public class Ingredient {
-	private long ingredient_id;
+	private long ingredientId;
 	private String name;
 	private int amount;
 	private String unit;
@@ -24,11 +24,16 @@ public class Ingredient {
 	public void setUnit(String unit) {
 		this.unit = unit;
 	}
-	public long getIngredient_id() {
-		return ingredient_id;
+	public long getIngredientId() {
+		return ingredientId;
 	}
-	public void setIngredient_id(long ingredient_id) {
-		this.ingredient_id = ingredient_id;
+	public void setIngredientId(long ingredientId) {
+		this.ingredientId = ingredientId;
 	}
-	
+	@Override
+	public int hashCode() {
+		int hash = 7;
+		hash = 31 * hash + (int) ingredientId;
+		return hash;
+	}
 }

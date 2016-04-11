@@ -1,5 +1,8 @@
 package services.recipe;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.ws.rs.*;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -23,8 +26,9 @@ public class RecipeServices {
 	public Response createRecipe(String recipeString) {
 		try {
 			Recipe recipe = mapper.readValue(recipeString, Recipe.class);
-			RecipeCommands.createRecipe(recipe);
-			return Response.status(Response.Status.CREATED).entity(recipeString).build();
+			HashMap<String, Object> result = RecipeCommands.createRecipe(recipe);
+//			result.put("recipe string", recipeString);
+			return Response.status(Response.Status.CREATED).entity(mapper.writeValueAsString(result)).build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Response.status(500).entity(e.toString()).build();
@@ -61,9 +65,9 @@ public class RecipeServices {
 	public Response updateRecipe(@PathParam("recipeId") long recipeId, String recipeString) {
 		try {
 			Recipe recipe = mapper.readValue(recipeString, Recipe.class);
-			boolean result = RecipeCommands.updateRecipe(recipeId, recipe);
-			String recipeJson = mapper.writeValueAsString(recipe);
-			return Response.status(Response.Status.OK).entity(recipeJson).build();
+			HashMap<String, Object> result = RecipeCommands.updateRecipe(recipeId, recipe);
+			String resultJson = mapper.writeValueAsString(result);
+			return Response.status(Response.Status.OK).entity(resultJson).build();
 		} catch (Exception e) {
 			return Response.status(500).entity(e.toString()).build();
 		}
@@ -74,10 +78,10 @@ public class RecipeServices {
 	@DELETE
 	@Path("{recipeId}")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN })
-	public Response deleteRecipe(@PathParam("id") long recipeId) {
-		boolean result = RecipeCommands.deleteRecipe(recipeId);
-		if (result) {
-			return Response.status(Response.Status.OK).entity(recipeId).build();
+	public Response deleteRecipe(@PathParam("recipeId") long recipeId) {
+		String result = RecipeCommands.deleteRecipe(recipeId);
+		if (!result.equals("")) {
+			return Response.status(Response.Status.OK).entity(result).build();
 		} else {
 			return Response.status(500).entity(false).build();
 		}
@@ -91,7 +95,7 @@ public class RecipeServices {
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN })
 	public Response searchRecipe(@QueryParam("searchParam") String searchParam) {
 		try {
-			Recipe[] recipes = RecipeCommands.searchRecipe(searchParam);
+			ArrayList<Recipe> recipes = RecipeCommands.searchRecipe(searchParam);
 			String recipeJson = mapper.writeValueAsString(recipes);
 			return Response.status(Response.Status.OK).entity(recipeJson).build();
 		} catch (JsonProcessingException e) {
@@ -102,11 +106,11 @@ public class RecipeServices {
 	// Get recipes created by the user HTTP GET
 	// ​​​URL: https://unhoven.herokuapp.com/rest/user/{id}/recipies/
 	@GET
-	@Path("recipies/{userId}")
+	@Path("user/{userId}")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN })
 	public Response searchRecipe(@PathParam("userId") long userId) {
 		try {
-			Recipe[] recipes = RecipeCommands.getRecipesByUser(userId);
+			ArrayList<Recipe> recipes = RecipeCommands.getRecipesByUser(userId);
 			String recipeJson = mapper.writeValueAsString(recipes);
 			return Response.status(Response.Status.OK).entity(recipeJson).build();
 		} catch (JsonProcessingException e) {

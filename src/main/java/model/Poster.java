@@ -4,18 +4,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
 
-@Path("user")
 public class Poster {
-	private long user_id;
+	private long userId;
 	private String userName;
-	
-	public long getUser_id() {
-		return user_id;
-	}
-
-	public void setUser_id(long user_id) {
-		this.user_id = user_id;
-	}
 	
 	public String getUserName() {
 		return userName;
@@ -25,10 +16,25 @@ public class Poster {
 		this.userName = userName;
 	}
 
-	@Path("{id}")
-	public Poster getUser(@PathParam("id") long id){
-		Poster user = new Poster();
-		user.setUser_id(id);
-		return user;
+//	@Path("{id}")
+//	public Poster getUser(@PathParam("id") long id){
+//		Poster user = new Poster();
+//		user.setUserId(id);
+//		return user;
+//	}
+
+	public long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
+	
+	@Override
+	public int hashCode() {
+		int hash = 7;
+		hash = 31 * hash + (int) userId;
+		return hash;
 	}
 }

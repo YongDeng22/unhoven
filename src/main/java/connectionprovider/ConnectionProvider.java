@@ -11,8 +11,8 @@ import java.sql.Statement;
 public class ConnectionProvider {
 	public static Connection getConnection() throws URISyntaxException,
 			SQLException {
-		URI dbUri = new URI(System.getenv("DATABASE_URL"));
-//		URI dbUri = new URI(PropertiesLookup.getInstance().getProperty("DATABASE_URL"));
+//		URI dbUri = new URI(System.getenv("DATABASE_URL"));
+		URI dbUri = new URI(PropertiesLookup.getInstance().getProperty("DATABASE_URL"));
 
 		String username = dbUri.getUserInfo().split(":")[0];
 		String password = dbUri.getUserInfo().split(":")[1];
