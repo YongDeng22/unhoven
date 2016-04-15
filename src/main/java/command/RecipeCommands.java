@@ -35,16 +35,17 @@ public class RecipeCommands {
 			ArrayList<Ingredient> ingredients = recipe.getIngredients();
 			for (Ingredient ingredient : ingredients) {
 				insertIngredient(ingredient, connection, result);
+				insertAssociation(recipe.getRecipeId(), ingredient.getIngredientId(), poster.getUserId(), connection, result);
 			}
-			result.put("insert operation", "sucess");
+			result.put("Recipe insert operation", "sucess");
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
-			result.put("insert operation", e.getMessage());
+			result.put("Recipe insert operation", e.getMessage());
 		} catch (SQLException e) {
-			result.put("insert operation", e.getMessage());
+			result.put("Recipe insert operation", e.getMessage());
 			e.printStackTrace();
 		} catch (Exception e) {
-			result.put("insert operation", e.getMessage());
+			result.put("Recipe insert operation", e.getMessage());
 			e.printStackTrace();
 		} finally {
 			connection.close();
@@ -70,15 +71,13 @@ public class RecipeCommands {
 				recipeStatement.setLong(10, recipe.getYieldNumber());
 				recipeStatement.setString(11, recipe.getYieldUnit());
 				recipeStatement.executeUpdate();
-				result.put("recipe operation for id: " + recipeId, "success");
+				result.put("Recipe insert operation for id: " + recipeId, "success");
 			} else {
-				result.put("recipe operation for id: " + recipeId, "Mising recipe ID");
+				result.put("Recipe insert operation for id: " + recipeId, "Mising recipe ID");
 			}
 		} catch (SQLException e) {
-			result.put("recipe operation", e.getMessage());
 			e.printStackTrace();
 		} catch (Exception e) {
-			result.put("recipe operation", e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -93,15 +92,15 @@ public class RecipeCommands {
 				posterStatement.setLong(1, posterId);
 				posterStatement.setString(2, poster.getUserName());
 				posterStatement.executeUpdate();
-				result.put("poster operation for id: " + posterId, "success");
+				result.put("Poster insert operation for id: " + posterId, "success");
 			} else {
-				result.put("poster operation for id: " + posterId, "Mising user ID");
+				result.put("Poster insert operation for id: " + posterId, "Mising user ID");
 			}
 		} catch (SQLException e) {
-			result.put("poster operation", e.getMessage());
+			result.put("Poster insert operation", e.getMessage());
 			e.printStackTrace();
 		} catch (Exception e) {
-			result.put("poster operation", e.getMessage());
+			result.put("Poster insert operation", e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -118,16 +117,16 @@ public class RecipeCommands {
 				posterStatement.setInt(3, ingredient.getAmount());
 				posterStatement.setString(4, ingredient.getUnit());
 				posterStatement.executeUpdate();
-				result.put("ingredient operation for id: " + ingredientId, "success");
+				result.put("Ingredient insert operation for id: " + ingredientId, "success");
 			} else {
-				result.put("ingredient operation for id: " + ingredientId, "Missing ingredient ID");
+				result.put("Ingredient insert operation for id: " + ingredientId, "Missing ingredient ID");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			result.put("ingredient operation", e.getMessage());
+			result.put("Ingredient insert operation", e.getMessage());
 		} catch (Exception e) {
 			e.printStackTrace();
-			result.put("ingredient operation", e.getMessage());
+			result.put("Ingredient insert operation", e.getMessage());
 		}
 	}
 
@@ -142,13 +141,13 @@ public class RecipeCommands {
 				associationStatement.setLong(2, userId);
 				associationStatement.setLong(3, ingredientId);
 				associationStatement.executeUpdate();
-				result.put("association operation", "success");
+				result.put("Association insert operation", "success");
 			}
 		} catch (SQLException e) {
-			result.put("association operation", e.getMessage());
+			result.put("Association insert operation", e.getMessage());
 			e.printStackTrace();
 		} catch (Exception e) {
-			result.put("association operation", e.getMessage());
+			result.put("Association insert operation", e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -259,12 +258,12 @@ public class RecipeCommands {
 			}
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
-			result.put("insert operation", e.getMessage());
+//			result.put("insert operation", e.getMessage());
 		} catch (SQLException e) {
-			result.put("insert operation", e.getMessage());
+//			result.put("insert operation", e.getMessage());
 			e.printStackTrace();
 		} catch (Exception e) {
-			result.put("insert operation", e.getMessage());
+//			result.put("insert operation", e.getMessage());
 			e.printStackTrace();
 		} finally {
 			try {
@@ -295,15 +294,15 @@ public class RecipeCommands {
 				recipeStatement.setLong(9, recipe.getYieldNumber());
 				recipeStatement.setString(10, recipe.getYieldUnit());
 				row = recipeStatement.executeUpdate();
-				result.put("recipe operation for id: " + recipeId, "success");
+				result.put("Recipe update operation for id: " + recipeId, "success");
 			} else {
-				result.put("recipe operation for id: " + recipeId, "Mising recipe ID");
+				result.put("Recipe update operation for id: " + recipeId, "Mising recipe ID");
 			}
 		} catch (SQLException e) {
-			result.put("recipe operation", e.getMessage());
+			result.put("Recipe update operation", e.getMessage());
 			e.printStackTrace();
 		} catch (Exception e) {
-			result.put("recipe operation", e.getMessage());
+			result.put("Recipe update operation", e.getMessage());
 			e.printStackTrace();
 		}
 		return row;
@@ -325,10 +324,10 @@ public class RecipeCommands {
 				result.put("Poster update operation for id: " + posterId, "Mising user ID");
 			}
 		} catch (SQLException e) {
-			result.put("Poster operation failed", e.getMessage());
+			result.put("Poster update operation failed", e.getMessage());
 			e.printStackTrace();
 		} catch (Exception e) {
-			result.put("Poster operation failed", e.getMessage());
+			result.put("Poster update operation failed", e.getMessage());
 			e.printStackTrace();
 		}
 		return row;
@@ -347,16 +346,16 @@ public class RecipeCommands {
 				posterStatement.setInt(2, ingredient.getAmount());
 				posterStatement.setString(3, ingredient.getUnit());
 				row = posterStatement.executeUpdate();
-				result.put("ingredient update operation for id: " + ingredientId, "success");
+				result.put("Ingredient update operation for id: " + ingredientId, "success");
 			} else {
-				result.put("ingredient update operation for id: " + ingredientId, "Missing ingredient ID");
+				result.put("Ingredient update operation for id: " + ingredientId, "Missing ingredient ID");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			result.put("ingredient operation failed", e.getMessage());
+			result.put("Ingredient operation failed", e.getMessage());
 		} catch (Exception e) {
 			e.printStackTrace();
-			result.put("ingredient operation failed", e.getMessage());
+			result.put("Ingredient operation failed", e.getMessage());
 		}
 		return row;
 	}
