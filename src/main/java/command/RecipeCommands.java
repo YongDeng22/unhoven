@@ -37,7 +37,7 @@ public class RecipeCommands {
 				insertIngredient(ingredient, connection, result);
 				insertAssociation(recipe.getRecipeId(), ingredient.getIngredientId(), poster.getUserId(), connection, result);
 			}
-			result.put("Recipe insert operation", "sucess");
+//			result.put("Recipe insert operation", "sucess");
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 			result.put("Recipe insert operation", e.getMessage());
