@@ -31,7 +31,10 @@ public class RecipeServices {
 			return Response.status(Response.Status.CREATED).entity(mapper.writeValueAsString(result)).build();
 		} catch (Exception e) {
 			e.printStackTrace();
-			return Response.status(500).entity(e.toString()).build();
+			return Response.status(500).entity(e.toString())
+					.header("Access-Control-Allow-Origin", "*")
+					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+					.build();
 		}
 	}
 	
@@ -44,7 +47,10 @@ public class RecipeServices {
 		try {
 			Recipe recipe = RecipeCommands.getRecipe(recipeId);
 			String recipeJson = mapper.writeValueAsString(recipe);
-			return Response.status(Response.Status.OK).entity(recipeJson).build();
+			return Response.status(Response.Status.OK).entity(recipeJson)
+					.header("Access-Control-Allow-Origin", "*")
+					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+					.build();
 //			return Response.status(Response.Status.OK).entity("test").build();
 
 		} catch (Exception e) {
@@ -53,7 +59,10 @@ public class RecipeServices {
 			for (StackTraceElement se: s) {
 				sb.append(se.getMethodName() + "\n");
 			}
-			return Response.status(500).entity(sb.toString()).build();
+			return Response.status(500).entity(sb.toString())
+					.header("Access-Control-Allow-Origin", "*")
+					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+					.build();
 		}
 	}
 
@@ -67,9 +76,15 @@ public class RecipeServices {
 			Recipe recipe = mapper.readValue(recipeString, Recipe.class);
 			HashMap<String, Object> result = RecipeCommands.updateRecipe(recipeId, recipe);
 			String resultJson = mapper.writeValueAsString(result);
-			return Response.status(Response.Status.OK).entity(resultJson).build();
+			return Response.status(Response.Status.OK).entity(resultJson)
+					.header("Access-Control-Allow-Origin", "*")
+					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+					.build();
 		} catch (Exception e) {
-			return Response.status(500).entity(e.toString()).build();
+			return Response.status(500).entity(e.toString())
+					.header("Access-Control-Allow-Origin", "*")
+					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+					.build();
 		}
 	}
 
@@ -81,9 +96,15 @@ public class RecipeServices {
 	public Response deleteRecipe(@PathParam("recipeId") long recipeId) {
 		String result = RecipeCommands.deleteRecipe(recipeId);
 		if (!result.equals("")) {
-			return Response.status(Response.Status.OK).entity(result).build();
+			return Response.status(Response.Status.OK).entity(result)
+					.header("Access-Control-Allow-Origin", "*")
+					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+					.build();
 		} else {
-			return Response.status(500).entity(false).build();
+			return Response.status(500).entity(false)
+					.header("Access-Control-Allow-Origin", "*")
+					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+					.build();
 		}
 	}
 
@@ -97,9 +118,15 @@ public class RecipeServices {
 		try {
 			ArrayList<Recipe> recipes = RecipeCommands.searchRecipe(query);
 			String recipeJson = mapper.writeValueAsString(recipes);
-			return Response.status(Response.Status.OK).entity(recipeJson).build();
+			return Response.status(Response.Status.OK).entity(recipeJson)
+					.header("Access-Control-Allow-Origin", "*")
+					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+					.build();
 		} catch (JsonProcessingException e) {
-			return Response.status(500).entity(e.toString()).build();
+			return Response.status(500).entity(e.toString())
+					.header("Access-Control-Allow-Origin", "*")
+					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+					.build();
 		}
 	}
 
@@ -112,9 +139,15 @@ public class RecipeServices {
 		try {
 			ArrayList<Recipe> recipes = RecipeCommands.getRecipesByUser(userId);
 			String recipeJson = mapper.writeValueAsString(recipes);
-			return Response.status(Response.Status.OK).entity(recipeJson).build();
+			return Response.status(Response.Status.OK).entity(recipeJson)
+					.header("Access-Control-Allow-Origin", "*")
+					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+					.build();
 		} catch (JsonProcessingException e) {
-			return Response.status(500).entity(e.toString()).build();
+			return Response.status(500).entity(e.toString())
+					.header("Access-Control-Allow-Origin", "*")
+					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+					.build();
 		}
 	}
 
