@@ -49,12 +49,12 @@ $(function() {
 		$("#message").html("");
 		var recipeId = $("#recipeId").val();
 		var url = "https://recipeservice.herokuapp.com/rest/recipe/" + recipeId;
-		var recipeJson = $("#recipeJSON").val();
+		var recipeJson = JSON.parse($("#recipeJSON").val());
 		
 		$.ajax({
 			url: url,
 			type: "PUT",
-			data: recipeJson,
+			data: JSON.stringify(recipeJson),
 			contentType: "application/json",
 			dataType: "json",
 			success: function(message) {
