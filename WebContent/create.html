@@ -46,7 +46,7 @@ $(function() {
 	$("#createRecipeBtn").click(function(num) {
 		$("#message").html("");
 		var recipeJson = $("#recipeJSON").val();
-		var url = "https://recipeservice.herokuapp.com/rest/recipe";
+		var url = "http://recipeservice.herokuapp.com/rest/recipe";
 		$.ajax({
 			url: url,
 			type: "POST",

@@ -42,7 +42,7 @@
 $(function() {
 	$("#findSingleRecipeBtn").click(function() {
 		var recipeId = $("#recipeId").val();
-		var url = "https://recipeservice.herokuapp.com/rest/recipe/" + recipeId;
+		var url = "http://recipeservice.herokuapp.com/rest/recipe/" + recipeId;
 		var htmlContent = "";
 		var ingHtmlContent = "";
 		$("#recipeTable").html("");

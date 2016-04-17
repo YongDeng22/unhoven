@@ -36,9 +36,9 @@
 
 <script type="text/javascript">
 	$(function() {		
-/* 		var url = "https://recipeservice.herokuapp.com/rest/recipe/search?query=";
- */		var url = "http://localhost:8080/unhoven/rest/recipe/search?query=";
- 		
+ 		var url = "http://recipeservice.herokuapp.com/rest/recipe/search?query=";
+/*  		var url = "http://localhost:8080/unhoven/rest/recipe/search?query=";
+ */ 		
  		$.getJSON(url, function(recipes) {
 			var recipeTable = $("#recipeTable");
 			var htmlContent = "";
