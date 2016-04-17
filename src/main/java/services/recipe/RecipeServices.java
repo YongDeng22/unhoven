@@ -70,23 +70,25 @@ public class RecipeServices {
 
 	// Updating a recipe HTTP PUT
 	// ​​URL: https://unhoven.herokuapp.com/rest/recipe/{id}
-	@POST
-	@Path("update/{recipeId}")
+	@PUT
+//	@Path("{recipeId}")
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN })
-	public Response updateRecipe(@PathParam("recipeId") long recipeId, String recipeString) {
+//	public Response updateRecipe(@PathParam("recipeId") long recipeId, String recipeString) {
+	public Response updateRecipe(String recipeString) {
 		try {
 			Recipe recipe = mapper.readValue(recipeString, Recipe.class);
-			HashMap<String, Object> result = RecipeCommands.updateRecipe(recipeId, recipe);
+//			HashMap<String, Object> result = RecipeCommands.updateRecipe(recipeId, recipe);
+			HashMap<String, Object> result = RecipeCommands.updateRecipe(recipe);
 			String resultJson = mapper.writeValueAsString(result);
 			return Response.status(Response.Status.OK).entity(resultJson)
 					.header("Access-Control-Allow-Origin", "*")
-					.header("Access-Control-Allow-Methods", "POST")
+					.header("Access-Control-Allow-Methods", "PUT")
 					.build();
 		} catch (Exception e) {
 			return Response.status(500).entity(e.toString())
 					.header("Access-Control-Allow-Origin", "*")
-					.header("Access-Control-Allow-Methods", "POST")
+					.header("Access-Control-Allow-Methods", "PUT")
 					.build();
 		}
 	}

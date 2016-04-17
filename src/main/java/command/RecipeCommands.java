@@ -227,10 +227,12 @@ public class RecipeCommands {
 
 // ******************************************************************************************************************
 	// REGION: UPDATE RECIPE AND POPULATE OTHER TABLES
-	public static HashMap<String, Object> updateRecipe(long recipeId, Recipe recipe) {
+	public static HashMap<String, Object> updateRecipe(Recipe recipe) {
+//		public static HashMap<String, Object> updateRecipe(long recipeId, Recipe recipe) {
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		ArrayList<Ingredient> ingredients = recipe.getIngredients();
 		Poster poster = recipe.getPoster();
+		long recipeId = recipe.getRecipeId();
 
 		try {
 			connection = ConnectionProvider.getConnection();
