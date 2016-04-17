@@ -28,7 +28,9 @@ public class RecipeServices {
 			Recipe recipe = mapper.readValue(recipeString, Recipe.class);
 			HashMap<String, Object> result = RecipeCommands.createRecipe(recipe);
 //			result.put("recipe string", recipeString);
-			return Response.status(Response.Status.CREATED).entity(mapper.writeValueAsString(result)).build();
+			return Response.status(Response.Status.CREATED).entity(mapper.writeValueAsString(result))
+					.header("Access-Control-Allow-Origin", "*")
+					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT").build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Response.status(500).entity(e.toString())

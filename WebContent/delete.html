@@ -13,57 +13,57 @@
 <script src="content/js/recipe.js"></script>
 </head>
 
-
-<body style="width:90%; margin:0 auto;">
+<body style="width: 90%; margin: 0 auto;">
 	<div class="container" style="width: 100%; margin: 20px auto;">
 		<h1>Recipe App Services</h1>
 		<div style="margin: 20px auto">
 			<a href="index.html" class="btn btn-primary">Home</a>
-			<a href="create.html" class="btn btn-info">Create</a>
+			<a href="create.html" class="btn btn-primary">Create</a>
 			<a href="get.html" class="btn btn-primary">Find</a>
 			<a href="search.html" class="btn btn-primary">Search</a>
 			<a href="update.html" class="btn btn-primary">Update</a>
 			<a href="get_by_user.html" class="btn btn-primary">Find by users</a>
-			<a href="delete.html" class="btn btn-primary">Delete a recipe</a>			
-		</div >	
-				
+			<a href="delete.html" class="btn btn-info">Delete a recipe</a>
+		</div>
+		
 		<div class="form-group">
-			<h3>Enter the recipe JSON</h3>
-			<textarea class="form-control" rows="15" cols="100" name="recipeJSON" id="recipeJSON" style="margin-bottom: 10px"></textarea>
-			<button class="btn btn-success" id="createRecipeBtn" style="margin-bottom: 20px; width: 200px">Create</button>
+			<h3>Delete a recipe with recipe ID:</h3>
+			<input class="form-control" type="text" name="recipeId" id="recipeId" style="width:200px; margin-bottom: 10px">
+			<button class="btn btn-success" id="findSingleRecipeBtn" style="margin-bottom: 20px; width: 200px">Delete</button>
 		</div>
 		
 		<div id="message"></div>
-		<div id="recipeTable"></div>
-		<div id="ingredientTable"></div>
-		<div id="posterTable"></div>
-	</div>
 
+	</div>
 </body>
 
 <script type="text/javascript">
 $(function() {
-	$("#createRecipeBtn").click(function(num) {
-		var recipeJson = $("#recipeJSON").val();
-		var url = "https://recipeservice.herokuapp.com/rest/recipe";
+	$("#findSingleRecipeBtn").click(function() {
+		var recipeId = $("#recipeId").val();
+		var url = "https://recipeservice.herokuapp.com/rest/recipe/" + recipeId;
+/* 		var htmlContent = "";
+		var ingHtmlContent = "";
+		$("#recipeTable").html("");
+		$("#ingredientTable").html("");
+		$("#posterTable").html(""); */
+		
 		$.ajax({
 			url: url,
-			type: "POST",
-			data: recipeJson,
-			dataType: "json",
+			type: "DELETE",
+			dataType: "text",
 			success: function(message) {
-				$("#message").append("<h3 style='color: red;'>" + JSON.stringify(message) + "</h3>");
+				$("#message").append("<h3 style='color: red;'>" + message + "</h3>");
 				$("#message").append("<a href='index.html' class='btn btn-primary'>Click to show all recipes</a>");
 			},
 			error: function() {
-				$("#message").append("<h3 style='color: red;'>Falied to create recipe.</h3>");
+				$("#message").append("<h3 style='color: red;'>Falied to delete recipe.</h3>");
 				$("#message").append("<a href='index.html' class='btn btn-primary'>Click to show all recipes</a>");
 
 			}
-		});
+		});		
 	});
 });
-
 
 
 </script>

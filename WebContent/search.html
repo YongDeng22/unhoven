@@ -10,28 +10,90 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
+<script src="content/js/recipe.js"></script>
 </head>
 
-
-<body style="width:80%; margin:0 auto;">
-	<div class="container" style="width:80%; margin:0 auto;">
+<body style="width: 90%; margin: 0 auto;">
+	<div class="container" style="width: 100%; margin: 20px auto;">
 		<h1>Recipe App Services</h1>
+		<div style="margin: 20px auto">
 			<a href="index.html" class="btn btn-primary">Home</a>
 			<a href="create.html" class="btn btn-primary">Create</a>
 			<a href="get.html" class="btn btn-primary">Find</a>
 			<a href="search.html" class="btn btn-info">Search</a>
 			<a href="update.html" class="btn btn-primary">Update</a>
 			<a href="get_by_user.html" class="btn btn-primary">Find by users</a>
+			<a href="delete.html" class="btn btn-primary">Delete a recipe</a>
+		</div>
+		
+		<div class="form-group">
+			<h3>Search recipes</h3>
+			<input class="form-control" type="text" name="query" id="query" style="width:500px; margin-bottom: 10px" placeholder="Enter keywords seperated by space">
+			<button class="btn btn-success" id="findSingleRecipeBtn" style="margin-bottom: 20px; width: 200px">Search</button>
+		</div>
+		
+		<div id="recipeTable"></div>
+		<div id="ingredientTable"></div>
+		<div id="posterTable"></div>
 	</div>
-
-	<div id="listRecipe"></div>
-	<div id="getSingleRecipe"></div>
-	<div id="createRecipe"></div>
-	<div id="searchRecipe"></div>
-	<div id="updateRecipe"></div>
-	<div id="findRecipeByUser"></div>
 </body>
 
+<script type="text/javascript">
+$(function() {
+	$("#findSingleRecipeBtn").click(function() {
+		var query = $("#query").val();
+		var url = encodeURI("https://recipeservice.herokuapp.com/rest/recipe/search?query=" + query);
+		var htmlContent = "";
+		var ingHtmlContent = "";
+		$("#recipeTable").html("");
+		$("#ingredientTable").html("");
+		$("#posterTable").html("");
+		
+		$.ajax({
+			url: url,
+			type: "GET",
+			dataType: "json",
+			success: function(recipes) {
+				var recipeTable = $("#recipeTable");
+				
+				if (recipes && recipes.length > 0) {
+					htmlContent += populateTableHead(recipes[0]);
+				
+					for (var x = 0; x < recipes.length; x++) {
+						var recipe = recipes[x];
+						var keys = Object.keys(recipe);
+					    recipeTable.append("<tr>");
+					    ingHtmlContent += "<p>Ingredient associated with recipe#: " + recipe["recipeId"] + "</p>";
+						console.log(recipe["recipeId"]);
+						for (var i in keys) {
+							if (keys[i] != "ingredients" && keys[i] != "poster") {
+									htmlContent += "<td style='border: solid 1px black; padding: 2px'>" + recipe[keys[i]] + "</td>";
+							} else if (keys[i] == "ingredients") {
+								htmlContent += "<td style='border: solid 1px black; padding: 2px'>" + getIngredientIDs(recipe[keys[i]]) + "</td>";
+		 						ingHtmlContent += populateIngredientTabe(recipe[keys[i]]);
+							} else if (keys[i] == "poster") {
+								htmlContent += "<td style='border: solid 1px black; padding: 2px'>" + recipe[keys[i]]["userId"] + "</td>";
+								if (x == 0) {			
+									populatePosterTable(recipe[keys[i]]);
+								}
+							}
+						}
+	
+					    htmlContent += "</tr>";
+					    ingHtmlContent += "</tbody></table>";
+					}
+					
+				   recipeTable.append(htmlContent);
+				   $("#ingredientTable").append(ingHtmlContent);
+				} else{
+					recipeTable.append("<h3 style='color: red;'>No recipes found.</h3>");
+				}
+			}		
+		});		
+	});
+});
+
+
+</script>
 
 </html>
