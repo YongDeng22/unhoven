@@ -72,6 +72,7 @@ public class RecipeServices {
 	// ​​URL: https://unhoven.herokuapp.com/rest/recipe/{id}
 	@PUT
 	@Path("{recipeId}")
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN })
 	public Response updateRecipe(@PathParam("recipeId") long recipeId, String recipeString) {
 		try {

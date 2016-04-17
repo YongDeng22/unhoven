@@ -44,6 +44,7 @@
 <script type="text/javascript">
 $(function() {
 	$("#createRecipeBtn").click(function(num) {
+		$("#message").html("");
 		var recipeJson = $("#recipeJSON").val();
 		var url = "https://recipeservice.herokuapp.com/rest/recipe";
 		$.ajax({
@@ -52,7 +53,7 @@ $(function() {
 			data: recipeJson,
 			dataType: "json",
 			success: function(message) {
-				$("#message").append("<h3 style='color: red;'>" + JSON.stringify(message) + "</h3>");
+				$("#message").append("<h4 style='color: red;'>" + JSON.stringify(message) + "</h4>");
 				$("#message").append("<a href='index.html' class='btn btn-primary'>Click to show all recipes</a>");
 			},
 			error: function() {
