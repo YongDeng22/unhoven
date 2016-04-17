@@ -71,15 +71,13 @@ public class RecipeServices {
 	// Updating a recipe HTTP PUT
 	// ​​URL: https://unhoven.herokuapp.com/rest/recipe/{id}
 	@PUT
-//	@Path("{recipeId}")
+	@Path("{recipeId}")
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN })
-//	public Response updateRecipe(@PathParam("recipeId") long recipeId, String recipeString) {
-	public Response updateRecipe(String recipeString) {
+	public Response updateRecipe(@PathParam("recipeId") long recipeId, String recipeString) {
 		try {
 			Recipe recipe = mapper.readValue(recipeString, Recipe.class);
-//			HashMap<String, Object> result = RecipeCommands.updateRecipe(recipeId, recipe);
-			HashMap<String, Object> result = RecipeCommands.updateRecipe(recipe);
+			HashMap<String, Object> result = RecipeCommands.updateRecipe(recipeId, recipe);
 			String resultJson = mapper.writeValueAsString(result);
 			return Response.status(Response.Status.OK).entity(resultJson)
 					.header("Access-Control-Allow-Origin", "*")
