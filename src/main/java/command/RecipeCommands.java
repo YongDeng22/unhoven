@@ -48,7 +48,9 @@ public class RecipeCommands {
 			result.put("Recipe insert operation", e.getMessage());
 			e.printStackTrace();
 		} finally {
-			connection.close();
+			if (connection != null) {
+				connection.close();
+			}	
 		}
 		return result;
 	}
@@ -194,7 +196,9 @@ public class RecipeCommands {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			connection.close();
+			if (connection != null) {
+				connection.close();
+			}
 		}
 		return recipe;
 	}
@@ -267,7 +271,9 @@ public class RecipeCommands {
 			e.printStackTrace();
 		} finally {
 			try {
-				connection.close();
+				if (connection != null) {
+					connection.close();
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -402,7 +408,9 @@ public class RecipeCommands {
 			e.printStackTrace();
 		} finally {
 			try {
-				connection.close();
+				if (connection != null) {
+					connection.close();
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -478,7 +486,9 @@ public class RecipeCommands {
 			e.printStackTrace();
 		} finally {
 			try {
-				connection.close();
+				if (connection != null) {
+					connection.close();
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -516,7 +526,9 @@ public class RecipeCommands {
 			e.printStackTrace();
 		} finally {
 			try {
-				connection.close();
+				if (connection != null) {
+					connection.close();
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

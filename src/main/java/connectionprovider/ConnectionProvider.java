@@ -4,7 +4,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -32,18 +31,18 @@ public class ConnectionProvider {
 	}
 
 	public static void main(String[] args) {
-		try {
-			Connection connection = getConnection();
-			Statement stmt = connection.createStatement();
-//			stmt.executeUpdate("INSERT INTO GOODS(THING) VALUES('My cool Item');");
-//			ResultSet rs = stmt.executeQuery("SELECT Thing FROM Goods");
-//			while (rs.next()) {
-//				System.out.println("Thing: " + rs.getString("thing"));
-//			}
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			Connection connection = getConnection();
+//			Statement stmt = connection.createStatement();
+////			stmt.executeUpdate("INSERT INTO GOODS(THING) VALUES('My cool Item');");
+////			ResultSet rs = stmt.executeQuery("SELECT Thing FROM Goods");
+////			while (rs.next()) {
+////				System.out.println("Thing: " + rs.getString("thing"));
+////			}
+//		} catch (URISyntaxException e) {
+//			e.printStackTrace();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
 	}
 }

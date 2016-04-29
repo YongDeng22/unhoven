@@ -1,8 +1,5 @@
 package model;
 
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-
 
 public class Poster {
 	private long userId;
